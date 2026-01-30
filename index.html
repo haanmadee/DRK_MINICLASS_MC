@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary: #821131;
+    --paper: #fdfbf7;
+    --text: #1a1a1a;
+    --text-light: #555;
+    --accent: #eaddcf;
+    --font-head: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+  }
+
+  body {
+    margin: 0; padding: 0;
+    background-color: #eee;
+    font-family: var(--font-body);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 480px; margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 50px rgba(0,0,0,0.08);
+    padding-bottom: 60px;
+    overflow-x: hidden;
+  }
+
+  /* --- HEADER: EDITORIAL STYLE --- */
+  .editorial-header {
+    padding: 60px 25px 40px;
+    text-align: center;
+    position: relative;
+    border-bottom: 3px double var(--accent);
+  }
+
+  .issue-tag {
+    font-family: var(--font-body); font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; color: #999; display: block; margin-bottom: 15px;
+  }
+
+  .main-headline {
+    font-family: var(--font-head); font-size: 42px; line-height: 0.95;
+    color: var(--primary); margin: 0; font-weight: 700;
+  }
+  
+  .sub-headline {
+    font-family: var(--font-head); font-size: 22px; font-style: italic;
+    color: var(--text); font-weight: 400; margin-top: 8px;
+  }
+
+  /* --- INFO BAR (Minimalist) --- */
+  .info-bar {
+    display: flex; justify-content: center; gap: 30px;
+    padding: 20px 0; border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .info-unit { text-align: center; }
+  .info-num { font-family: var(--font-head); font-size: 18px; color: var(--primary); font-weight: 700; }
+  .info-cap { font-size: 9px; text-transform: uppercase; color: #888; letter-spacing: 1px; }
+
+  /* --- ARTICLE BODY (Drop Cap) --- */
+  .article-body {
+    padding: 30px 30px 10px;
+    text-align: justify; /* Justify for magazine block look */
+  }
+
+  .article-text {
+    font-size: 13px; color: var(--text-light); line-height: 1.8; margin-bottom: 20px;
+  }
+
+  /* EFEK HURUF PERTAMA BESAR (DROP CAP) */
+  .article-text::first-letter {
+    float: left;
+    font-family: var(--font-head);
+    font-size: 65px;
+    line-height: 55px;
+    padding-right: 12px;
+    padding-top: 4px;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* --- CURRICULUM: MODERN LIST --- */
+  .syllabus-section {
+    padding: 20px 30px;
+    background: linear-gradient(to bottom, #fff, #fafafa);
+    margin: 20px 0;
+  }
+  
+  .section-title {
+    text-align: center; font-family: var(--font-head); font-size: 20px;
+    color: var(--text); margin-bottom: 25px; position: relative;
+    font-style: italic;
+  }
+  .section-title::after {
+    content: ""; display: block; width: 40px; height: 2px; 
+    background: var(--primary); margin: 10px auto 0;
+  }
+
+  .module-item {
+    display: flex; align-items: baseline;
+    padding: 12px 0; border-bottom: 1px solid #eee;
+  }
+  .module-item:last-child { border-bottom: none; }
+  
+  .module-idx {
+    font-family: var(--font-head); font-size: 14px; color: var(--accent);
+    font-weight: 700; width: 25px; flex-shrink: 0;
+  }
+  
+  .module-name {
+    font-size: 12px; font-weight: 500; color: #333; line-height: 1.4;
+  }
+
+  /* --- BENEFITS (BADGES) --- */
+  .perks-row {
+    display: flex; justify-content: center; gap: 15px;
+    padding: 0 20px 30px;
+  }
+  
+  .perk-badge {
+    border: 1px solid var(--accent); padding: 10px 15px;
+    border-radius: 50px; text-align: center;
+    font-size: 10px; color: var(--primary); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    background: #fff;
+  }
+
+  /* --- SLIDERS (Tetap sama logikanya, style dirapikan) --- */
+  .slider-wrapper { margin: 30px 0; overflow: hidden; }
+  
+  .slider-caption {
+    text-align: center; font-family: var(--font-body); font-size: 9px;
+    color: #aaa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;
+  }
+
+  /* Animasi Kanan ke Kiri (Image) */
+  @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  
+  /* Animasi Kiri ke Kanan (Testi) */
+  @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+  .track-img {
+    display: flex; width: max-content;
+    animation: scrollLeft 25s linear infinite; padding-left: 20px;
+  }
+  .track-testi {
+    display: flex; width: max-content;
+    animation: scrollRight 25s linear infinite;
+  }
+  
+  .track-img:hover, .track-testi:hover { animation-play-state: paused; }
+
+  /* Image Item */
+  .photo-card {
+    width: 160px; height: 160px; margin-right: 15px;
+    border-radius: 4px; overflow: hidden; flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-card:hover { transform: scale(1.1); z-index: 5; }
+
+  /* Testi Item */
+  .quote-card {
+    width: 240px; padding: 20px; margin-right: 20px;
+    background: #fff; border: 1px solid #f0f0f0;
+    box-shadow: 5px 5px 0 #f7f7f7;
+    flex-shrink: 0; font-family: var(--font-head);
+  }
+  .quote-text { font-size: 13px; font-style: italic; color: #444; line-height: 1.5; }
+  .quote-author {
+    margin-top: 10px; font-family: var(--font-body); font-size: 10px;
+    font-weight: 700; color: var(--primary); text-transform: uppercase; text-align: right;
+  }
+
+  /* --- FOOTER --- */
+  .mag-footer {
+    text-align: center; margin-top: 50px;
+    font-family: var(--font-head); font-style: italic; color: var(--primary);
+    border-top: 1px solid #eee; padding-top: 20px; width: 80%; margin-left: auto; margin-right: auto;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="editorial-header">
+    <span class="issue-tag">The Academy • Vol. 03</span>
+    <h1 class="main-headline">MC Fundamentals</h1>
+    <h2 class="sub-headline">Virtual Mini Class</h2>
+  </header>
+
+  <div class="info-bar">
+    <div class="info-unit">
+      <div class="info-num">04</div>
+      <div class="info-cap">Meetings</div>
+    </div>
+    <div class="info-unit">
+      <div class="info-num">Zoom</div>
+      <div class="info-cap">Platform</div>
+    </div>
+    <div class="info-unit">
+      <div class="info-num">4-6</div>
+      <div class="info-cap">Nonas</div>
+    </div>
+  </div>
+
+  <div class="article-body">
+    <p class="article-text">
+      Mau belajar MC tapi kalau privat kemahalan, sedangkan kalau webinar malah bikin ngantuk? Tenang, <strong>Mini Class</strong> ini jawabannya! Kita akan belajar bareng dalam grup kecil yang super <em>intimate</em> dan suportif. 
+    </p>
+    <p class="article-text">
+      Praktik langsung dipandu aku, dapat teman baru, dan pastinya materi yang "daging" banget buat bekal Nona terjun ke dunia MC profesional. <em>Let’s unlock your voice!</em>
+    </p>
+  </div>
+
+  <div class="syllabus-section">
+    <div class="section-title">The Syllabus</div>
+    
+    <div class="module-item">
+      <div class="module-idx">01</div>
+      <div class="module-name">Teknik Vokal & Visual (Eye Contact Mastery)</div>
+    </div>
+    <div class="module-item">
+      <div class="module-idx">02</div>
+      <div class="module-name">Menulis Cue Card Anti-Ngebosenin</div>
+    </div>
+    <div class="module-item">
+      <div class="module-idx">03</div>
+      <div class="module-name">Body Language Control di Panggung</div>
+    </div>
+    <div class="module-item">
+      <div class="module-idx">04</div>
+      <div class="module-name">Praktik MC Semi-Formal & Informal</div>
+    </div>
+  </div>
+
+  <div class="perks-row">
+    <div class="perk-badge">📄 PDF Modul</div>
+    <div class="perk-badge">🎓 E-Certificate</div>
+    <div class="perk-badge">💌 Personal Notes</div>
+  </div>
+
+  <div class="slider-wrapper">
+    <div class="slider-caption">Class Moments (Swipe Left)</div>
+    <div class="track-img">
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769779959819-101b6998-6b9f-49a6-9ff6-551b30bc5ea7.png" alt="Class 1"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769779990062-0fda7fc6-0ae6-4c53-ac5a-664d5f14d0f2.png" alt="Class 2"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769780009379-ee08b73e-80b3-4eb3-8d9f-191486b20b94.png" alt="Class 3"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769780030809-34c338b5-b110-4709-b57b-e8fe525c576f.png" alt="Class 4"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769780049905-7c9e9000-a266-4173-957d-722b9500b637.png" alt="Class 5"></div>
+
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769779959819-101b6998-6b9f-49a6-9ff6-551b30bc5ea7.png" alt="Class 1"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769779990062-0fda7fc6-0ae6-4c53-ac5a-664d5f14d0f2.png" alt="Class 2"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769780009379-ee08b73e-80b3-4eb3-8d9f-191486b20b94.png" alt="Class 3"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769780030809-34c338b5-b110-4709-b57b-e8fe525c576f.png" alt="Class 4"></div>
+      <div class="photo-card"><img src="https://image2url.com/r2/default/images/1769780049905-7c9e9000-a266-4173-957d-722b9500b637.png" alt="Class 5"></div>
+    </div>
+  </div>
+
+  <div class="slider-wrapper">
+    <div class="slider-caption">Alumni Stories (Swipe Right)</div>
+    <div class="track-testi">
+      
+      <div class="quote-card">
+        <div class="quote-text">"Seru banget mini class-nya! Walau ramean tapi tetep diperhatiin satu-satu sama kak Mila."</div>
+        <div class="quote-author">Nona R***a</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">"Dapet temen baru sesama MC pemula, jadi semangat belajarnya nambah!"</div>
+        <div class="quote-author">Nona D***i</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">"Materi cue card-nya daging bgt, aku baru tau trik biar ga kaku bacanya."</div>
+        <div class="quote-author">Nona F***a</div>
+      </div>
+
+      <div class="quote-card">
+        <div class="quote-text">"Seru banget mini class-nya! Walau ramean tapi tetep diperhatiin satu-satu sama kak Mila."</div>
+        <div class="quote-author">Nona R***a</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">"Dapet temen baru sesama MC pemula, jadi semangat belajarnya nambah!"</div>
+        <div class="quote-author">Nona D***i</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">"Materi cue card-nya daging bgt, aku baru tau trik biar ga kaku bacanya."</div>
+        <div class="quote-author">Nona F***a</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="mag-footer">
+    Grow Together,<br><strong>Nona!</strong> 👯‍♀️
+  </div>
+
+</div>
+
+</body>
+</html>
