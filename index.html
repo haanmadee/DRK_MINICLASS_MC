@@ -35,10 +35,24 @@
 
   /* --- HEADER: EDITORIAL STYLE --- */
   .editorial-header {
-    padding: 60px 25px 40px;
+    padding: 30px 25px 40px; /* Padding atas dibuat 30px agar ada space sebelum gambar */
     text-align: center;
     position: relative;
     border-bottom: 3px double var(--accent);
+  }
+
+  /* --- BANNER GAMBAR PALING ATAS --- */
+  .top-banner-box {
+    margin-bottom: 25px; /* Jarak antara gambar dengan teks judul di bawahnya */
+    border-radius: 8px;   /* Opsional: membuat sudut gambar sedikit melengkung rapi */
+    overflow: hidden;
+  }
+
+  .top-banner-img {
+    width: 100%;
+    height: auto; /* Otomatis proporsional ikuti rasio gambar carousel/lanskap kamu */
+    display: block;
+    object-fit: cover;
   }
 
   .issue-tag {
@@ -50,7 +64,7 @@
     font-family: var(--font-head); font-size: 42px; line-height: 0.95;
     color: var(--primary); margin: 0; font-weight: 700;
   }
-   
+    
   .sub-headline {
     font-family: var(--font-head); font-size: 22px; font-style: italic;
     color: var(--text); font-weight: 400; margin-top: 8px;
@@ -58,10 +72,10 @@
 
   /* --- INFO BAR (Minimalist) --- */
   .info-bar {
-    display: flex; justify-content: center; gap: 20px; /* Sedikit dirapatkan agar muat 4 item */
+    display: flex; justify-content: center; gap: 20px;
     padding: 20px 0; border-bottom: 1px solid #f0f0f0;
   }
-   
+    
   .info-unit { text-align: center; }
   .info-num { font-family: var(--font-head); font-size: 18px; color: var(--primary); font-weight: 700; }
   .info-cap { font-size: 9px; text-transform: uppercase; color: #888; letter-spacing: 1px; }
@@ -69,7 +83,7 @@
   /* --- ARTICLE BODY (Drop Cap) --- */
   .article-body {
     padding: 30px 30px 10px;
-    text-align: justify; /* Justify for magazine block look */
+    text-align: justify;
   }
 
   .article-text {
@@ -94,7 +108,7 @@
     background: linear-gradient(to bottom, #fff, #fafafa);
     margin: 20px 0;
   }
-   
+    
   .section-title {
     text-align: center; font-family: var(--font-head); font-size: 20px;
     color: var(--text); margin-bottom: 25px; position: relative;
@@ -110,12 +124,12 @@
     padding: 12px 0; border-bottom: 1px solid #eee;
   }
   .module-item:last-child { border-bottom: none; }
-   
+    
   .module-idx {
     font-family: var(--font-head); font-size: 14px; color: var(--accent);
     font-weight: 700; width: 25px; flex-shrink: 0;
   }
-   
+    
   .module-name {
     font-size: 12px; font-weight: 500; color: #333; line-height: 1.4;
   }
@@ -125,7 +139,7 @@
     display: flex; justify-content: center; gap: 15px;
     padding: 0 20px 30px;
   }
-   
+    
   .perk-badge {
     border: 1px solid var(--accent); padding: 10px 15px;
     border-radius: 50px; text-align: center;
@@ -134,18 +148,15 @@
     background: #fff;
   }
 
-  /* --- SLIDERS (Tetap sama logikanya, style dirapikan) --- */
+  /* --- SLIDERS --- */
   .slider-wrapper { margin: 30px 0; overflow: hidden; }
-   
+    
   .slider-caption {
     text-align: center; font-family: var(--font-body); font-size: 9px;
     color: #aaa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;
   }
 
-  /* Animasi Kanan ke Kiri (Image) */
   @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-   
-  /* Animasi Kiri ke Kanan (Testi) */
   @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
   .track-img {
@@ -156,7 +167,7 @@
     display: flex; width: max-content;
     animation: scrollRight 25s linear infinite;
   }
-   
+    
   .track-img:hover, .track-testi:hover { animation-play-state: paused; }
 
   /* Image Item */
@@ -195,6 +206,12 @@
 <div class="container">
 
   <header class="editorial-header">
+    
+    <!-- GAMBAR BANNER PALING ATAS -->
+    <div class="top-banner-box">
+      <img src="https://www.image2url.com/r2/default/images/1785414423311-9408f0af-3f0d-48ea-8f68-b0d218a9b555.jpeg" class="top-banner-img" alt="Header Banner">
+    </div>
+
     <span class="issue-tag">The Academy • Vol. 03</span>
     <h1 class="main-headline">MC Fundamentals</h1>
     <h2 class="sub-headline">Virtual Mini Class</h2>
@@ -278,7 +295,7 @@
   <div class="slider-wrapper">
     <div class="slider-caption">Alumni Stories (Swipe Right)</div>
     <div class="track-testi">
-       
+        
       <div class="quote-card">
         <div class="quote-text">"Seru banget mini class-nya! Walau ramean tapi tetep diperhatiin satu-satu sama kak Mila."</div>
         <div class="quote-author">Nona R***a</div>
